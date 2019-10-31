@@ -1,0 +1,27 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: true
+packages:
+ - python3-pip
+ - python-dev
+ - build-essential
+ - git
+ - rabbitmq-server
+byobu_default: system
+
+
+runcmd:
+ - apt-get update -y
+ - rabbitmqctl add_user workeruser bheftye
+ - rabbitmqctl add_vhost parser
+ - rabbitmqctl set_permissions -p parser workeruser ".*" ".*" ".*"
+ - service rabbitmq-server restart
+ - pip3 install celery
+ - pip3 install flask
+ - git clone git@github.com:bheftye/cloudcomputing.git
+ - cd cloudcomputing/Lab3
+ - chmod 777 run-worker.sh
+ - chmod 777 commander.py
+ - screen -dmSL worker ./run-worker.sh
+ - screen -dmSL commander python3 commander.py
