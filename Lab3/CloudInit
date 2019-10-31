@@ -19,9 +19,9 @@ runcmd:
  - service rabbitmq-server restart
  - pip3 install celery
  - pip3 install flask
- - git clone git@github.com:bheftye/cloudcomputing.git
+ - git clone https://github.com/bheftye/cloudcomputing
  - cd cloudcomputing/Lab3
- - chmod 777 run-worker.sh
- - chmod 777 commander.py
- - screen -dmSL worker ./run-worker.sh
- - screen -dmSL commander python3 commander.py
+ - chmod 777 worker.sh
+ - chmod 777 server.py
+ - screen -dmSL worker ./worker.sh
+ - screen -dmSL commander python3 server.py
