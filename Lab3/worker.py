@@ -1,8 +1,7 @@
 from celery import Celery
 import json
 
-app = Celery('tasks', backend='rpc://', broker='pyamqp://workeruser:bheftye@10.10.10.15:5672/parser')
-
+app = Celery('tasks', backend='rpc://', broker='amqp://localhost')
 
 @app.task
 def parse(file, pronouns):

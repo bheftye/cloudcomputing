@@ -13,9 +13,8 @@ byobu_default: system
 
 runcmd:
  - apt-get update -y
- - rabbitmqctl add_user workeruser bheftye
- - rabbitmqctl add_vhost parser
- - rabbitmqctl set_permissions -p parser workeruser ".*" ".*" ".*"
+ - rabbitmqctl add_user super super
+ - rabbitmqctl sed_user_permissions -p super super ".*" ".*" ".*"
  - service rabbitmq-server restart
  - pip3 install celery
  - pip3 install flask
